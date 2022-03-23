@@ -57,6 +57,7 @@ const Style = StyleSheet.create({
   },
   buttons: {
     paddingTop: 15,
+    width: winWidth - 30,
     justifyContent: "flex-end",
     alignItems: "center",
   },
