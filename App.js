@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './src/pages/home/index';
+import Photo from './src/components/photo/index';
 
 export default function App() {
   return (
-    <Home></Home>
+    // <Home></Home>
+    <Photo imageUri='./src/assets/images/user.png' />
   );
 }
 
