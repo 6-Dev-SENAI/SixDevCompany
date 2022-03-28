@@ -1,11 +1,18 @@
 import React from "react";
-import { Image, View, Text } from "react-native";
+import { Image, View } from "react-native";
 import Styles from "./styles";
 
-function Photo(props) {
-    return <Image style={Styles.img} source={require(props.imageUri)} />
+const Photo = props => {
+    return (
+        <View style={Styles.frame}>
+            <Image
+                source={props.imageSource}
+                style={Styles.img}
+            />
+        </View>
+    )
 };
 
 export default Photo;
 
-// SINTAX: <Photo imageUri='./src/assets/images/user.png' />
+// Syntax: <Photo imageSource={require('./src/assets/images/image.x')}/>

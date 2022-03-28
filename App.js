@@ -1,12 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Home from './src/pages/home/index';
-import Photo from './src/components/photo/index';
+import Profile from './src/components/profile/index';
 
 export default function App() {
   return (
-    // <Home></Home>
-    <Photo imageUri='./src/assets/images/user.png' />
+    <View>
+      <Profile
+        imageSource={require('./src/assets/images/user.png')}
+        name="Kelvin Novais"
+        job="Engineer"
+      />
+    </View>
   );
 }
 
