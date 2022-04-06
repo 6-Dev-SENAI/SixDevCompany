@@ -8,14 +8,14 @@ const User = require('../../assets/images/user.png');
 export default function DropDownButton(props) {
     return (
         <MenuProvider style={Styles.menuProvider}>
-            <Menu onSelect={value => alert(`You Clicked : ${value}`)}>
+            <Menu style={Styles.menu} onSelect={value => alert(`You Clicked : ${value}`)}>
 
                 <MenuTrigger>
                     {/* <Text style={Styles.headerText}>(IMG)</Text> */}
                     <Image source={User} style={Styles.img} />
                 </MenuTrigger>
 
-                <MenuOptions>
+                <MenuOptions style={Styles.menuOptions}>
                     {/* Map options, adding a key to each child generated; the key is basically the value of the option converted to string */}
                     {props.properties.map((property) =>
                         <MenuOption value={property.route} key={property.option.toString()}>
