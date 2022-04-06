@@ -4,7 +4,8 @@ const Styles = StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'center',
-        width: 112,
+        width:150,
+        paddingTop:30
     },
     name: {
         fontSize: 13,

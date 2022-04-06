@@ -5,26 +5,11 @@ import logoball from "../../assets/images/sixdev-balls.png";
 // import user from "../../assets/images/user.png";
 import Styles from "./styles";
 
-function Header() {
-    const menuProperties = [
-        {
-            option: 'Option 1',
-            route: 'Route 1'
-        },
-        {
-            option: 'Option 2',
-            route: 'Route 2'
-        },
-        {
-            option: 'Option 3',
-            route: 'Route 3'
-        }
-    ]
-
+function Header(props) {
     return (
         <View style={Styles.container}>
             <Image source={logoball} style={Styles.img} />
-            <DropDownButton properties={menuProperties} />
+            <DropDownButton properties={props.menuProperties} />
         </View>
     );
 }

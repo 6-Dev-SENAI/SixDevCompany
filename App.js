@@ -1,25 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Home from './src/pages/home/index';
+import Employees from './src/pages/employees/index';
 import Profile from './src/components/profile/index';
+import DropDownButton from './src/components/drop-down-button/index';
 
 export default function App() {
   return (
-    <View>
-      <Profile
-        imageSource={require('./src/assets/images/user.png')}
-        name="Kelvin Novais"
-        job="Engineer"
-      />
-    </View>
+    <Employees />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

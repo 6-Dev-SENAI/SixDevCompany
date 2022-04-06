@@ -6,7 +6,7 @@ const Styles = StyleSheet.create({
         backgroundColor: "#4C96A5",
         flexDirection: "row",
         justifyContent: "space-between",
-        position: "relative"
+        position: "relative",
     },
     img: {
         height: 14,

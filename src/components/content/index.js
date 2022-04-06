@@ -1,13 +1,13 @@
-import { SafeAreaView, View, Text } from "react-native"
+import { View } from "react-native"
 import Styles from "./style"
 
 
-function Content(){
-    return(
-    <View style={Styles.container}/>
-    
+function Content(props) {
+    return (
+        <View style={Styles.container}>
+            {props.children}
+        </View>
     );
-
 }
 
 export default Content;
