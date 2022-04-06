@@ -15,4 +15,4 @@ const Photo = props => {
 
 export default Photo;
 
-// Syntax: <Photo imageSource={require('./src/assets/images/image.x')}/>
+// Usage: <Photo imageSource={require('./src/assets/images/image.x')}/>

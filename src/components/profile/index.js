@@ -17,7 +17,7 @@ const Profile = props => {
 
 export default Profile;
 
-/*  Syntax:
+/*  Usage:
 
     <Profile
         imageSource={require('./src/assets/images/user.png')}
