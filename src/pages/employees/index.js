@@ -46,7 +46,7 @@ export default function Employees() {
                         />
                         <Profile
                             imageSource={require('../../assets/images/user.png')}
-                            name="Edmilson Babaca"
+                            name="Edmilson Lima"
                             job="Back-End Developer"
                         />
                     </View>

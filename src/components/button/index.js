@@ -5,7 +5,10 @@ import Styles from "./styles";
 export default function Button(props) {
     return (
         <View style={Styles.buttons}>
-            <Pressable style={Styles.button}>
+            <Pressable
+                style={Styles.button}
+                onPress={props.op}
+            >
                 <Text style={Styles.button_text}>{props.text}</Text>
             </Pressable>
         </View>

@@ -6,7 +6,6 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-around',
     },
-
 });
 
 export default Styles;
