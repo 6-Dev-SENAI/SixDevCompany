@@ -1,24 +1,6 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
 const Styles = StyleSheet.create({
-    // PROFILE STYLES
-    container: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        width:150,
-        paddingTop:30
-    },
-    name: {
-        fontSize: 13,
-        fontWeight: "bold",
-        paddingTop: 5,
-    },
-    job: {
-        fontSize: 13,
-        paddingTop: 3,
-    },
-
-    // POPUP STYLES
     centeredView: {
         flex: 1,
         justifyContent: "center",
@@ -75,5 +57,6 @@ const Styles = StyleSheet.create({
         fontWeight: "bold"
     }
 });
+
 
 export default Styles;
