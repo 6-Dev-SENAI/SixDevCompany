@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Modal, Text, Pressable, View } from "react-native";
 import Styles from "./styles";
-
+// Caso queiramos trabalhar com props
 const ModalButton = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (

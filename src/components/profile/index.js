@@ -16,7 +16,7 @@ const Profile = props => {
                     setModalVisible(!modalVisible);
                 }}
             >
-
+{/* Analisar como o back vai fazer a modificação dos botões para tipo de usuário ADM/USUARIOComum*/}
                 {/* POPUP */}
                 <View style={Styles.centeredView}>
                     <View style={Styles.modalView}>

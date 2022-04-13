@@ -21,7 +21,7 @@ const menuProperties = [
     }
 ]
 
-export default function Employees() {
+export default function Inicio() {
     return (
         <>
             <Header menuProperties={menuProperties} />

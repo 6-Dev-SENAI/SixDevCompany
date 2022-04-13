@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, Image, SafeAreaView, TextInput, Pressable } from "react-native";
 import Styles from "./styles";
 
-function Home() {
+function Login() {
     const [username, onChangeUsername] = React.useState("");
     const [passwd, onChangePasswd] = React.useState("");
     return (
@@ -41,4 +41,4 @@ function Home() {
     );
 };
 
-export default Home;
+export default Login;
