@@ -1,8 +1,14 @@
 import React from "react";
-import { Text, View, Image, SafeAreaView, TextInput, Pressable } from "react-native";
+import { Text, View, Image, SafeAreaView, TextInput, Pressable, Button } from "react-native";
 import Styles from "./styles";
 
+
+import {useNavigation} from "@react-navigation/native";
+
+
 function Login() {
+
+    const navigation = useNavigation();
     const [username, onChangeUsername] = React.useState("");
     const [passwd, onChangePasswd] = React.useState("");
     return (
@@ -31,7 +37,7 @@ function Login() {
                     </SafeAreaView>
                     <View style={Styles.buttons}>
                         <Pressable style={Styles.button}>
-                            <Text style={Styles.button_text}>Entrar</Text>
+                            <Button style={Styles.button_text} title="Entrar" onPress={() => navigation.navigate("Inicio")}  />
                         </Pressable>
                         <Text style={Styles.forgot}>Esqueci a senha</Text>
                     </View>
