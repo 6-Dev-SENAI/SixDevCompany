@@ -14,26 +14,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
 
-const Data =
-  [
-    {
-      nome: 'nome',
-      cargo: 'cargo',
-      uf: 'uf',
-      cidade: 'cidade',
-      endereco: 'endereço',
-      telefone: 'telefone',
-      cep: 'cep',
-      bairro: 'bairro',
-      numero: 'numero'
-    }
-  ]
+
 function MyStack() {
   return (
     <Stack.Navigator initialRouteName="Login">
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Inicio" component={Inicio} />
-      <Stack.Screen name="Registro" component={RegistrarUsuario} />
+      <Stack.Screen component={Login} />
+      <Stack.Screen component={Inicio} />
+      <Stack.Screen component={RegistrarUsuario} />
     </Stack.Navigator>
   );
 }

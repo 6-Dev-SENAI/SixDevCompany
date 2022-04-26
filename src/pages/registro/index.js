@@ -12,55 +12,48 @@ import Content from "../../components/content";
 import Styles from "./styles";
 import Botao from "../../components/button";
 
+const dados  = [
+  {
+    nome:"Nome",
+    cargo:"Cargo",
+    telefone:"Telefone",
+    cidade:"Cidade",
+    bairro:"Bairro"
+  }
+]
+
 export default function RegistrarUsuario(props) {
   return (
     <>
       <Content>
         <SafeAreaView>
-        {props.dados.map((info) =>
-          <View>
+          {props.dados.map((info) => (
             <View>
-              <Photo />
-            </View>
-            <View style={Styles.bloco1}>
-              <View style={Styles.descript}>
-                <Text>{info.nome}</Text>
-              </View>
               <View>
-                <Text>{info.cargo}</Text>
+                <Photo />
               </View>
-            </View>
-            <View style={Styles.bloco2}>
-              <View>
-                <Text>{info.endereco}</Text>
-              </View>
+              <View style={Styles.bloco1}>
 
-              <View>
-                <Text>{info.numero}</Text>
+                <View style={Styles.descript}>
+                  <Text><b>Nome:</b>{info.nome}</Text>
+                </View>
+
+                <View>
+                  <Text><b>Cargo</b>{info.cargo}</Text>
+                </View>
+
+                <View>
+                  <Text><b>Endereço</b>{info.endereco}</Text>
+                </View>
+
+                <View>
+                  <Text><b>Telefone</b>{info.telefone}</Text>
+                </View>
+
+                <Botao text={"Salvar"} />
               </View>
             </View>
-            <View style={Styles.bloco3}>
-              <View>
-                <Text>{info.cep}</Text>
-              </View>
-              <View>
-                <Text>{info.bairro}</Text>
-              </View>
-            </View>
-            <View style={Styles.bloco4}>
-              <View>
-                <Text>{info.cidade}</Text>
-              </View>
-              <View>
-                <Text>{info.uf}</Text>
-              </View>
-            </View>
-            <View style={Styles.bloco5}>
-              <Text>{info.telefone}</Text>
-            </View>
-            <Botao text={"Salvar"} />
-          </View>
-        )}
+          ))}
         </SafeAreaView>
       </Content>
     </>
