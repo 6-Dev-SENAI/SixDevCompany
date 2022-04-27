@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+
 
 const Styles = StyleSheet.create({
   descript: {

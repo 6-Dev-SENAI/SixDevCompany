@@ -48,9 +48,8 @@ export default function RegistrarUsuario() {
                   <TextInput>{info.telefone}</TextInput>
                 </View>
                 <Button
-                  style={Styles.button_text}
-                  title="Cadastrar"
                   color={"#4C96A5"}
+                  title="Cadastrar"
                   onPress={() => navigation.navigate("Inicio")}
                 />
               </View>

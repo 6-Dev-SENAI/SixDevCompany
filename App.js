@@ -1,6 +1,7 @@
-import Inicio from "./src/pages/telaInicio/index";
-import RegistrarUsuario from "./src/pages/registro/index";
-import Login from "./src/pages/telaLogin/index";
+import Inicio from "./src/pages/initial/index";
+import RegistrarUsuario from "./src/pages/register/index";
+import Login from "./src/pages/login/index";
+import Edit from "./src/pages/edituser/index";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 const Stack = createStackNavigator();
@@ -11,6 +12,7 @@ function MyStack() {
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Inicio" component={Inicio} />
       <Stack.Screen name="Registro" component={RegistrarUsuario} />
+      <Stack.Screen name="Editar" component={Edit} />
     </Stack.Navigator>
   );
 }

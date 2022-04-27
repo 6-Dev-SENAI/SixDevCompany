@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from "react-native";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const Styles = StyleSheet.create({
   // PROFILE STYLES
@@ -26,16 +27,10 @@ const Styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    margin: 20,
     backgroundColor: "white",
     borderRadius: 10,
     padding: 20,
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
@@ -45,29 +40,19 @@ const Styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     marginBottom: 5,
+    color:"white",
+    backgroundColor:"#4C96A5"
   },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonEdit: {
-    backgroundColor: "yellow",
-  },
-  buttonDelete: {
-    backgroundColor: "red",
-  },
-  buttonClose: {
-    // backgroundColor: "#2196F3",
-  },
+ 
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
   textClose: {
-    color: "black",
-    fontWeight: "normal",
+    color: "white",
+    fontWeight: "bold",
     textAlign: "center",
-    textDecorationLine: "underline",
   },
   modalText: {
     marginBottom: 15,
