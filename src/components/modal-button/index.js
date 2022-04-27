@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Alert, Modal, Text, Pressable, View } from "react-native";
 import Styles from "./styles";
-// Caso queiramos trabalhar com props
+
 const ModalButton = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
@@ -15,22 +15,15 @@ const ModalButton = (props) => {
           setModalVisible(!modalVisible);
         }}
       >
-
         {/* POPUP */}
         <View style={Styles.centeredView}>
           <View style={Styles.modalView}>
             <Text style={Styles.modalText}>Escolha uma opção:</Text>
             {/* OPÇÕES */}
-            <Pressable
-              style={[Styles.button, Styles.buttonEdit]}
-              // onPress={() => setModalVisible(!modalVisible)}
-            >
+            <Pressable style={[Styles.button, Styles.buttonEdit]}>
               <Text>Editar funcionário</Text>
             </Pressable>
-            <Pressable
-              style={[Styles.button, Styles.buttonDelete]}
-              // onPress={() => setModalVisible(!modalVisible)}
-            >
+            <Pressable style={[Styles.button, Styles.buttonDelete]}>
               <Text style={Styles.textStyle}>Deletar funcionário</Text>
             </Pressable>
             <Pressable

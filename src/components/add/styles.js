@@ -1,12 +1,6 @@
 import { StyleSheet } from "react-native";
 
 const Styles = StyleSheet.create({
-  menuProvider: {
-    flexDirection: "column",
-    marginTop: 14,
-    alignSelf: "flex-end",
-    position: "absolute",
-  },
   headerText: {
     fontSize: 15,
     margin: 10,
@@ -22,8 +16,9 @@ const Styles = StyleSheet.create({
     height: "100%",
   },
   img: {
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
+    alignItems: "center",
   },
 });
 

@@ -1,61 +1,64 @@
 import React from "react";
-import {
-  Text,
-  View,
-  Image,
-  SafeAreaView,
-  TextInput,
-  Pressable,
-} from "react-native";
+import { Text, View, SafeAreaView, Button, TextInput } from "react-native";
 import Photo from "../../components/photo";
 import Content from "../../components/content";
 import Styles from "./styles";
-import Botao from "../../components/button";
+import Header from "../../components/header";
+import Footer from "../../components/footer";
 
-const dados  = [
+import { useNavigation } from "@react-navigation/native";
+
+const dados = [
   {
-    nome:"Nome",
-    cargo:"Cargo",
-    telefone:"Telefone",
-    cidade:"Cidade",
-    bairro:"Bairro"
-  }
-]
+    nome: "nome",
+    cargo: "cargo",
+    cidade: "cidade",
+    telefone: "telefone",
+  },
+];
 
-export default function RegistrarUsuario(props) {
+export default function RegistrarUsuario() {
+  const navigation = useNavigation();
+
   return (
     <>
+      <Header />
       <Content>
         <SafeAreaView>
-          {props.dados.map((info) => (
-            <View>
+          {dados.map((info) => (
+            <View style={Styles.geral}>
               <View>
-                <Photo />
+                <Photo imageSource={require("../../assets/images/user.png")} />
               </View>
               <View style={Styles.bloco1}>
-
                 <View style={Styles.descript}>
-                  <Text><b>Nome:</b>{info.nome}</Text>
+                  <Text style={Styles.textdecor}>Nome:</Text>
+                  <TextInput>{info.nome}</TextInput>
                 </View>
-
-                <View>
-                  <Text><b>Cargo</b>{info.cargo}</Text>
+                <View style={Styles.descript}>
+                  <Text style={Styles.textdecor}>Cargo:</Text>
+                  <TextInput>{info.cargo}</TextInput>
                 </View>
-
-                <View>
-                  <Text><b>Endereço</b>{info.endereco}</Text>
+                <View style={Styles.descript}>
+                  <Text style={Styles.textdecor}>Cidade:</Text>
+                  <TextInput>{info.cidade}</TextInput>
                 </View>
-
-                <View>
-                  <Text><b>Telefone</b>{info.telefone}</Text>
+                <View style={Styles.descript}>
+                  <Text style={Styles.textdecor}>Telefone:</Text>
+                  <TextInput>{info.telefone}</TextInput>
                 </View>
-
-                <Botao text={"Salvar"} />
+                <Button
+                  style={Styles.button_text}
+                  title="Cadastrar"
+                  color={"#4C96A5"}
+                  onPress={() => navigation.navigate("Inicio")}
+                />
               </View>
             </View>
           ))}
         </SafeAreaView>
       </Content>
+      <Footer />
     </>
   );
 }
