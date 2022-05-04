@@ -7,6 +7,7 @@ import {
   TextInput,
   Pressable,
   Button,
+  Alert
 } from "react-native";
 import Styles from "./styles";
 
@@ -34,6 +35,18 @@ function Login() {
     });
 
     let json = await response.json()
+    console.log(json)
+    console.log(json.message)
+
+    if (json.message === "Funcionario nao encontrado"){
+      return Alert.alert("Funcionario nao encontrado");
+    }
+    else if(json.message === 'Senha Invalida'){
+      return Alert.alert("Senha Invalida")
+    }
+    else{
+      navigation.navigate("Inicio")
+    }
 //falta terminar ess essa parte do que esta voltando do bac
   }
   return (
