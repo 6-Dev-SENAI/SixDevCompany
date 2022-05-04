@@ -15,7 +15,27 @@ import { useNavigation } from "@react-navigation/native";
 function Login() {
   const navigation = useNavigation();
   const [username, onChangeUsername] = React.useState("");
-  const [passwd, onChangePasswd] = React.useState("");
+  const [password, onChangePassword] = React.useState("");
+  const [login, onChangelogin] = React.useState("");
+
+
+  //envio do formulario de username
+  async function sendForm() {
+    let response = await fetch('http://192.168.100.14:3000/login', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        login: login,
+        senha: password
+      })
+    });
+
+    let json = await response.json()
+//falta terminar ess essa parte do que esta voltando do bac
+  }
   return (
     <SafeAreaView style={Styles.bgcolor}>
       <View style={Styles.container}>
@@ -29,15 +49,15 @@ function Login() {
           <SafeAreaView>
             <TextInput
               style={Styles.input}
-              onChangeText={onChangeUsername}
-              value={username}
+              onChangeText={onChangelogin}
+              value={login}
               placeholder="Login"
               placeholderTextColor="#474747"
             />
             <TextInput
               style={Styles.input}
-              onChangeText={onChangePasswd}
-              value={passwd}
+              onChangeText={onChangePassword}
+              value={password}
               placeholder="Senha"
               placeholderTextColor="#474747"
               secureTextEntry={true}
@@ -49,7 +69,8 @@ function Login() {
                 style={Styles.button_text}
                 title="Entrar"
                 color={"#4C96A5"}
-                onPress={() => navigation.navigate("Inicio")}
+                // onPress={() => navigation.navigate("Inicio")}
+                onPress={() => sendForm()}
               />
             </Pressable>
             <Text style={Styles.forgot}>Esqueci a senha</Text>
