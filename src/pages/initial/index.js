@@ -3,113 +3,158 @@ import Header from "../../components/header/index";
 import Content from "../../components/content/index";
 import Footer from "../../components/footer/index";
 import Profile from "../../components/profile";
-import { View } from "react-native";
+import { View, Pressable, Button, Text, Alert } from "react-native";
 import Styles from "./styles";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import Services from "../../services";
+const api = new Services();
 
 export default function Inicio() {
-  const [funcionario, setfuncionario] = useState([]);
-  
-  
-  
-  async function buscarFuncionario() {
-    let response = await fetch('http://192.168.100.14:3000/funcionarios', {
-      method: 'GET',
+  const [loading, setLoading] = useState(false);
 
-    });
-    let json = await response.json()
-    console.log(json)
-
-    json.map((object) => {
-      // let phrase = `nome: ${object.nome} Cargo ${object.cargo}\n`;
-      // console.log(phrase)
-      const funcionario = {
-        nome: object.nome,
-        cargo: object.cargo
-      }
-      setfuncionario(funcionario)
-
-      console.log(`nome: ${funcionario.nome} Cargo ${funcionario.cargo}`)
-
-
-    });
-
+  function Reload() {
+    return (
+      <View style={Styles.reload}>
+        <Pressable style={Styles.reload_btn}>
+          {loading ? (
+            <Text style={Styles.realod_text}>Carregando...</Text>
+          ) : (
+            <Button
+              style={Styles.realod_text}
+              title="Recarregar tela"
+              color={"#4C96A5"}
+              // onPress={() => navigation.navigate("Inicio")}
+              onPress={() => getStaffs()}
+            />
+          )}
+        </Pressable>
+      </View>
+    );
   }
 
+  const [staffs, setStaffs] = useState([]);
 
+  async function getStaffs() {
+    try {
+      setLoading(true);
 
-  buscarFuncionario()
+      const response = await api.getStaffs();
 
+      const data = response.filter(
+        (staff) => staff._id !== "627dcf75fe79daf476a62bc6"
+      );
 
+      setStaffs([...data]);
+      setLoading(false);
 
-// console.log("esse é o set" + setfuncionario)
+      return data;
+    } catch (error) {
+      setLoading(false);
+      if (error.message.includes("timeout")) {
+        Alert.alert(
+          "Não consegui acessar os servidores, tente novamente mais tarde!"
+        );
+      } else {
+        const { message } = error.response.data;
 
-  // console.log(buscarFuncionario())
- 
-  // }
-  // const Item = ({}) => (
-    
-  //   <View>
-  //     <Profile
+        if (!message) {
+          Alert.alert(
+            "Um erro inesperado ocorreu, tente novamente mais tarde!"
+          );
+        }
+      }
+    }
+  }
 
-  //       imageSource={require("../../assets/images/user.png")}
-  //       name="Kelvin Novais"
-  //       job="Fullstack Developer"
-  //     />
-  //   </View>
-  // );
+  useEffect(() => {
+    getStaffs();
+  }, []);
 
-  // const renderItem = ({ item }) => {
-  //   return (<Item line={item.line} name={item.name} prefix={item.prefix}
+  function Render({ staffs = [] }) {
+    let couple = [];
+    let individual = [];
 
-  //   />)
-  // };
+    while (staffs.length > 0) {
+      if (staffs.length > 1) {
+        couple.push(staffs.splice(0, 2));
+      } else {
+        individual.push(staffs.splice(0, 1)[0]);
+      }
+    }
 
+    return (
+      <>
+        <RenderTwo couples={couple} />
+        <RenderOne individuals={individual} />
+      </>
+    );
+  }
 
+  function RenderTwo({ couples = [] }) {
+    if (couples.length > 0) {
+      return (
+        <>
+          {couples.map((couple = []) => {
+            return (
+              <View style={Styles.container}>
+                {couple.map((staff) => (
+                  <Profile
+                    name={staff.nome}
+                    job={staff.cargo}
+                    city={staff.cidade}
+                    tel={staff.telefone}
+                    password={staff.senha}
+                    userId={staff._id}
+                    getStaffs={getStaffs}
+                    imageSource={require("../../assets/images/user.png")}
+                  />
+                ))}
+              </View>
+            );
+          })}
+        </>
+      );
+    } else return <></>;
+  }
+
+  function RenderOne({ individuals = [] }) {
+    if (individuals.length > 0) {
+      return (
+        <>
+          {individuals.map((staff) => (
+            <View style={Styles.container}>
+              <Profile
+                name={staff.nome}
+                job={staff.cargo}
+                city={staff.cidade}
+                tel={staff.telefone}
+                password={staff.senha}
+                userId={staff._id}
+                getStaffs={getStaffs}
+                imageSource={require("../../assets/images/user.png")}
+              />
+            </View>
+          ))}
+        </>
+      );
+    } else return <></>;
+  }
 
   return (
     <>
-      <Header />
+      <Header getStaffs={getStaffs} />
       <Content>
-        <View style={Styles.container}>
-
-           <Profile
-              imageSource = { require("../../assets/images/user.png") }
-            name = "Guilherme Severiano"
-            job = "Front-End Developer"
-            />
-          <Profile
-            imageSource={require("../../assets/images/user.png")}
-            name="Guilherme Severiano"
-            job="Front-End Developer"
-          />
-        </View>
-        <View style={Styles.container}>
-          <Profile
-            imageSource={require("../../assets/images/user.png")}
-            name="Gustavo Apolonio"
-            job="Tech-Lead Fullstack"
-          />
-          <Profile
-            imageSource={require("../../assets/images/user.png")}
-            name="Edmilson Lima"
-            job="Back-End Developer"
-          />
-        </View>
-        <View style={Styles.container}>
-          <Profile
-            imageSource={require("../../assets/images/user.png")}
-            name="Ana Alves"
-            job="Designer"
-          />
-          <Profile
-            imageSource={require("../../assets/images/user.png")}
-            name="Diogo Lima"
-            job="Back-End Developer"
-          />
-        </View>
+        {staffs.length > 0 ? (
+          <Render staffs={[...staffs]} />
+        ) : (
+          () => {
+            Alert.alert("Não há funcionários cadastrados no sistema.");
+            return <Reload />;
+          }
+        )}
       </Content>
       <Footer />
     </>
-  )
+  );
 }

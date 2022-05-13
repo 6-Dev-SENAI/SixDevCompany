@@ -7,48 +7,58 @@ import {
   TextInput,
   Pressable,
   Button,
-  Alert
+  Alert,
 } from "react-native";
 import Styles from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
 
+import Services from "../../services";
+const api = new Services();
+
 function Login() {
   const navigation = useNavigation();
-  const [username, onChangeUsername] = React.useState("");
   const [password, onChangePassword] = React.useState("");
   const [login, onChangelogin] = React.useState("");
 
-
-  //envio do formulario de username
   async function sendForm() {
-    let response = await fetch('http://192.168.100.14:3000/login', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        login: login,
-        senha: password
-      })
-    });
+    try {
+      const body = {
+        login,
+        senha: password,
+      };
 
-    let json = await response.json()
-    console.log(json)
-    console.log(json.message)
+      if (!body.login.trim()) {
+        Alert.alert("Por favor, preencha o usuário!");
+        return;
+      }
+      if (!body.senha.trim()) {
+        Alert.alert("Por favor, preencha a senha!");
+        return;
+      }
 
-    if (json.message === "Funcionario nao encontrado"){
-      return Alert.alert("Funcionario nao encontrado");
+      const response = await api.login(body);
+
+      navigation.navigate("Inicio");
+
+      return response;
+    } catch (error) {
+      if (error.message.includes("timeout")) {
+        Alert.alert(
+          "Não consegui acessar os servidores, tente novamente mais tarde!"
+        );
+      } else {
+        const { message } = error.response.data;
+
+        if (!message) {
+          Alert.alert(
+            "Um erro inesperado ocorreu, tente novamente mais tarde!"
+          );
+        }
+      }
     }
-    else if(json.message === 'Senha Invalida'){
-      return Alert.alert("Senha Invalida")
-    }
-    else{
-      navigation.navigate("Inicio")
-    }
-//falta terminar ess essa parte do que esta voltando do bac
   }
+
   return (
     <SafeAreaView style={Styles.bgcolor}>
       <View style={Styles.container}>
@@ -86,7 +96,13 @@ function Login() {
                 onPress={() => sendForm()}
               />
             </Pressable>
-            <Text style={Styles.forgot}>Esqueci a senha</Text>
+            <Pressable
+              onPress={() => {
+                Alert.alert("Contate o seu administrador!");
+              }}
+            >
+              <Text style={Styles.forgot}>Esqueci a senha</Text>
+            </Pressable>
           </View>
         </View>
       </View>

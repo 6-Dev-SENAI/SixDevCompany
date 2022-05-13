@@ -7,7 +7,7 @@ import Adduser from "../add";
 
 import { useNavigation } from "@react-navigation/native";
 
-function Header() {
+function Header({ getStaffs }) {
   const navigation = useNavigation();
 
   return (
@@ -15,7 +15,7 @@ function Header() {
       <Pressable onPress={() => navigation.navigate("Inicio")}>
         <Image source={logoball} style={Styles.img} />
       </Pressable>
-      <Pressable onPress={() => navigation.navigate("Registro")}>
+      <Pressable onPress={() => navigation.navigate("Registro", { getStaffs })}>
         <Adduser />
       </Pressable>
     </View>

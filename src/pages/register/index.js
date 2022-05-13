@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, SafeAreaView, Button, TextInput } from "react-native";
+import { Alert, View, SafeAreaView, Button, TextInput } from "react-native";
 import Photo from "../../components/photo";
 import Content from "../../components/content";
 import Styles from "./styles";
@@ -8,19 +8,12 @@ import Footer from "../../components/footer";
 
 import { useNavigation } from "@react-navigation/native";
 
-// const dados = [
-//   {
-//     nome: "nome",
-//     cargo: "cargo",
-//     cidade: "cidade",
-//     telefone: "telefone",
-//     senha: "senha"
-//   },
-// ];
+import Services from "../../services";
+const api = new Services();
 
-
-
-export default function RegistrarUsuario() {
+export default function RegistrarUsuario({
+  route = { params: { getStaffs: () => {} } },
+}) {
   const navigation = useNavigation();
 
   const [nome, onChangenome] = React.useState("");
@@ -29,31 +22,46 @@ export default function RegistrarUsuario() {
   const [telefone, onChangetelefone] = React.useState("");
   const [senha, onChangesenha] = React.useState("");
 
-  async function sendForm() {
-    let response = await fetch('http://192.168.100.14:3000/cadastrar', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        nome: nome,
-        cargo: cargo,
-        cidade: cidade,
-        telefone: telefone,
-        senha: senha
-      })
-    });
+  const { getStaffs } = route.params;
 
-    let json = await response.json()
-    console.log(json)
+  async function sendForm() {
+    try {
+      const body = {
+        nome: nome.trim(),
+        cargo: cargo.trim(),
+        telefone: telefone.trim().replace("-", ""),
+        senha: senha.trim(),
+        cidade: cidade.trim(),
+      };
+
+      const response = await api.createStaff(body);
+
+      getStaffs();
+      navigation.navigate("Inicio");
+
+      return response;
+    } catch (error) {
+      if (error.message.includes("timeout")) {
+        Alert.alert(
+          "Não consegui acessar os servidores, tente novamente mais tarde!"
+        );
+      } else {
+        const { message } = error.response.data;
+
+        if (!message) {
+          Alert.alert(
+            "Um erro inesperado ocorreu, tente novamente mais tarde!"
+          );
+        }
+      }
+    }
   }
+
   return (
     <>
       <Header />
       <Content>
         <SafeAreaView>
-
           <View style={Styles.geral}>
             <View>
               <Photo imageSource={require("../../assets/images/user.png")} />
@@ -111,7 +119,6 @@ export default function RegistrarUsuario() {
               />
             </View>
           </View>
-
         </SafeAreaView>
       </Content>
       <Footer />
